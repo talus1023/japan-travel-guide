@@ -901,7 +901,7 @@ setTimeout(updateCheck, 100);
   function updateCD(){
     var el=document.getElementById('countdownDisplay');
     if(!el)return;
-    var now=new Date(), dep=new Date(2026,5,18,10,10,0); // June 18 10:10
+    var now=new Date(), dep=new Date(2026,5,18,7,0,0); // June 18 10:10
     var diff=dep-now;
     if(diff<=0){el.textContent='🎉 出发啦！';return;}
     var d=Math.floor(diff/864e5);
