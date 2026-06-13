@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+<title>🗾 日本六天情侣自由行</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+:root{--pink:#F5A0B0;--pink-l:#FFF0F3;--indigo:#2B3A67;--gold:#D9963B;--gold-l:#FFF8E7;--moss:#5B7B5E;--moss-l:#EEF5EE;--crimson:#D4380D;--bg:#FAFAF8;--card:#fff;--text:#333;--tl:#999;--radius:16px;--shadow:0 2px 16px rgba(0,0,0,0.06)}
+body{font-family:-apple-system,BlinkMacSystemFont,'Helvetica Neue','PingFang SC','Microsoft YaHei',sans-serif;background:var(--bg);color:var(--text);font-size:15px;line-height:1.7;padding-bottom:80px}
+.hide{display:none!important}
+
+/* header */
+.header{padding:28px 18px 16px;text-align:center;background:linear-gradient(135deg,#FFF0F3,#EDE4FF);border-radius:0 0 28px 28px}
+.header h1{font-size:1.5rem;font-weight:700;color:var(--indigo)}
+.header h1 span{color:var(--crimson)}
+.header .sub{font-size:0.82rem;color:var(--tl);margin-top:3px}
+.header .tag-row{display:flex;justify-content:center;gap:6px;flex-wrap:wrap;margin-top:10px}
+.header .tag{font-size:0.7rem;background:rgba(255,255,255,0.7);padding:3px 12px;border-radius:30px;font-weight:500}
+
+/* day tabs */
+.tab-bar{display:flex;gap:4px;padding:12px 14px 8px;overflow-x:auto;scrollbar-width:none;white-space:nowrap;-webkit-overflow-scrolling:touch;position:sticky;top:0;z-index:10;background:var(--bg)}
+.tab-bar::-webkit-scrollbar{display:none}
+.tab-btn{flex-shrink:0;padding:8px 16px;border-radius:30px;border:none;background:var(--card);font-size:0.78rem;font-weight:500;color:var(--tl);box-shadow:var(--shadow);transition:all .2s;font-family:inherit;cursor:pointer}
+.tab-btn.active{background:var(--indigo);color:#fff;transform:scale(1.05)}
+.tab-btn .date{font-size:0.65rem;font-weight:400;opacity:0.7;display:block}
+
+/* day cards */
+.day-card{margin:12px 14px;border-radius:var(--radius);background:var(--card);box-shadow:var(--shadow);overflow:hidden;display:none}
+.day-card.active{display:block}
+.day-hd{padding:14px 16px;font-weight:700;font-size:1.05rem;display:flex;justify-content:space-between;align-items:center}
+.day-hd .meta{font-size:0.72rem;font-weight:400;color:var(--tl);text-align:right}
+.day-bd{padding:6px 16px 16px}
+
+/* timeline */
+.tl{position:relative;padding-left:24px}
+.tl::before{content:'';position:absolute;left:5px;top:6px;bottom:6px;width:2px;background:#E8E0E8}
+.tl-item{position:relative;margin-bottom:14px;padding-left:4px}
+.tl-item::before{content:'';position:absolute;left:-22px;top:6px;width:12px;height:12px;border-radius:50%;background:var(--pink);border:3px solid #fff;box-shadow:0 0 0 2px var(--pink)}
+.tl-item .time{font-size:0.72rem;color:var(--tl);font-weight:500}
+.tl-item .act{font-size:0.88rem;margin-top:1px}
+.tl-item .act strong{color:var(--indigo)}
+.tl-item .tip{font-size:0.78rem;color:var(--tl);margin-top:1px}
+.tl-item .tags{margin-top:3px}
+.tl-item .tags .t{display:inline-block;font-size:0.68rem;padding:1px 8px;border-radius:8px;margin:1px 2px 1px 0;font-weight:500}
+.tl-item .tags .photo{background:#E0F0FF;color:#3A6A9A}
+.tl-item .tags .food{background:var(--gold-l);color:#8B6F1E}
+.tl-item .tags .warn{background:#FFE8E0;color:#B85C3A}
+.tl-item.photo{background:#F0F6FF;border-radius:10px;padding:8px 12px;border-left:3px solid #6A9FD8}
+.tl-item.photo::before{background:#6A9FD8;border-color:#6A9FD8}
+.tl-item.photo .time{color:#3A6A9A}
+.tl-item.photo .act{font-weight:500}
+.meal{display:flex;gap:6px;flex-wrap:wrap;margin:4px 0}
+.meal .m{font-size:0.78rem;background:var(--gold-l);padding:3px 10px;border-radius:14px;border:1px solid rgba(217,150,59,0.12)}
+
+/* sections */
+.section{padding:16px 14px}
+.section h2{font-size:1.05rem;font-weight:700;color:var(--indigo);margin-bottom:10px;padding-left:10px;border-left:3px solid var(--crimson)}
+.photo-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.photo-card{background:#F0F6FF;border-radius:10px;padding:10px 12px;border-left:3px solid #6A9FD8}
+.photo-card .pn{font-weight:600;font-size:0.82rem}
+.photo-card .pd{font-size:0.72rem;color:var(--tl);margin-top:2px}
+.photo-card .pt{font-size:0.7rem;color:#3A6A9A;margin-top:2px}
+
+/* hotel cards */
+.hotel-list{display:flex;flex-direction:column;gap:10px}
+.hotel-card{background:var(--card);border-radius:12px;padding:12px 14px;box-shadow:var(--shadow);border:1px solid #f0f0f0}
+.hotel-card .hr{font-size:0.7rem;font-weight:600;color:#8B6F1E;background:var(--gold-l);display:inline-block;padding:0 8px;border-radius:8px;margin-bottom:2px}
+.hotel-card .hn{font-weight:700;font-size:0.92rem}
+.hotel-card .hp{font-size:0.78rem;color:var(--tl);margin:2px 0 4px}
+.hotel-card .hi{font-size:0.78rem;line-height:1.5}
+.hotel-card .hc{font-size:0.75rem;background:#F5F0FF;padding:3px 8px;border-radius:6px;margin-top:6px}
+
+/* checklist */
+.ck{display:flex;flex-direction:column;gap:6px}
+.ck-item{background:var(--card);border-radius:10px;padding:10px 14px;box-shadow:var(--shadow);display:flex;align-items:center;gap:10px;font-size:0.85rem;border:1px solid #f0f0f0}
+.ck-item input[type=checkbox]{width:18px;height:18px;accent-color:var(--moss);flex-shrink:0;border-radius:4px}
+
+/* budget */
+.budget-box{background:linear-gradient(135deg,var(--gold-l),#FFFDF5);border-radius:var(--radius);padding:14px 16px;margin:0 14px 14px;border:1px solid rgba(217,150,59,0.15)}
+.budget-box h3{font-size:0.95rem;margin-bottom:8px;color:#8B6F1E}
+.budget-row{display:flex;justify-content:space-between;padding:4px 0;font-size:0.82rem;border-bottom:1px solid #F0E8D8}
+.budget-row:last-child{border-bottom:none;font-weight:700;font-size:0.9rem;padding-top:6px;border-top:2px solid var(--gold);margin-top:4px}
+
+/* floating nav */
+.fnav{position:fixed;bottom:0;left:0;right:0;background:rgba(255,255,255,0.95);backdrop-filter:blur(10px);padding:8px 14px 12px;display:flex;gap:4px;overflow-x:auto;scrollbar-width:none;box-shadow:0 -2px 16px rgba(0,0,0,0.06);z-index:100}
+.fnav::-webkit-scrollbar{display:none}
+.fnav a{flex-shrink:0;font-size:0.72rem;padding:6px 12px;border-radius:20px;background:var(--card);border:1px solid #eee;color:var(--tl);text-decoration:none;white-space:nowrap;transition:all .2s}
+.fnav a.active{background:var(--indigo);color:#fff;border-color:var(--indigo)}
+</style>
+</head>
+<body>
+
+<!-- ======== HEADER ======== -->
+<div class="header">
+  <h1>🗾 <span>日本六天</span> 情侣自由行</h1>
+  <div class="sub">东京 · 镰仓 · 京都 · 大阪 · 无脑跟着走</div>
+  <div class="tag-row">
+    <span class="tag">✈️ 6/18→6/23</span>
+    <span class="tag">💑 情侣二人</span>
+    <span class="tag">💰 ¥4,200~5,500</span>
+    <span class="tag">🗺️ 东京进·大阪出</span>
+  </div>
+</div>
+
+<!-- ======== BUDGET ======== -->
+<div class="budget-box" onclick="showTab('budget')" style="cursor:pointer;">
+  <h3>💰 预算概览（双人·不含机票购物）</h3>
+  <div class="budget-row"><span>🏨 住宿（详见酒店推荐）</span><span>¥1,550~2,900</span></div>
+  <div class="budget-row"><span>🍜 餐饮 约14餐</span><span>~¥1,400</span></div>
+  <div class="budget-row"><span>🚄 新干线 东京→京都</span><span>~¥1,300</span></div>
+  <div class="budget-row"><span>🚃 市内交通（Suica）</span><span>~¥600</span></div>
+  <div class="budget-row"><span>🎫 门票杂项</span><span>~¥200</span></div>
+  <div class="budget-row"><span>📱 其他</span><span>~¥150</span></div>
+  <div class="budget-row"><span>💰 总计</span><span>~¥4,200~5,500</span></div>
+  <div style="font-size:0.7rem;color:var(--tl);margin-top:6px;">👇 点我查看详细酒店推荐和4种预算方案</div>
+</div>
+
+<!-- ======== TAB BAR ======== -->
+<div class="tab-bar" id="tabBar">
+  <button class="tab-btn active" onclick="showTab('d1')">Day1<span class="date">6/18🛬</span></button>
+  <button class="tab-btn" onclick="showTab('d2')">Day2<span class="date">6/19🗼</span></button>
+  <button class="tab-btn" onclick="showTab('d3')">Day3<span class="date">6/20🌊</span></button>
+  <button class="tab-btn" onclick="showTab('d4')">Day4<span class="date">6/21🚄</span></button>
+  <button class="tab-btn" onclick="showTab('d5')">Day5<span class="date">6/22🏯</span></button>
+  <button class="tab-btn" onclick="showTab('d6')">Day6<span class="date">6/23🛫</span></button>
+  <button class="tab-btn" onclick="showTab('photo')">📸拍照</button>
+  <button class="tab-btn" onclick="showTab('hotel')">🏨住宿</button>
+  <button class="tab-btn" onclick="showTab('pack')">🎒清单</button>
+</div>
+
+<!-- ======== DAY 1 ======== -->
+<div class="day-card active" id="d1">
+  <div class="day-hd" style="background:#E0E8F5;"><span>1 · 🛬 6/18（周四）到达东京</span><span class="meta">🍙 便利店晚餐</span></div>
+  <div class="day-bd">
+    <div class="tl">
+      <div class="tl-item"><div class="time">08:00~20:50</div><div class="act">✈️ 广州→香港CX983→成田CX500</div></div>
+      <div class="tl-item"><div class="time">20:50~21:40</div><div class="act"><strong>🛬 成田T2入境</strong><div class="tip">晚上人少通关快 → 激活Suica</div></div></div>
+      <div class="tl-item"><div class="time">21:40~23:00</div><div class="act"><strong>🚃 成田→上野</strong><div class="tip">京成Skyliner末班23:00前（¥2,570/41min）或Access特急（¥1,310/1h）</div></div></div>
+      <div class="tl-item"><div class="time">23:00~23:30</div><div class="act"><strong>🏨 酒店Check-in</strong><div class="tip">住上野/日暮里附近（东横INN/APA/Super Hotel）</div></div></div>
+      <div class="tl-item"><div class="time">~睡前</div><div class="act"><strong>🏪 便利店晚餐</strong><span class="tags"><span class="t food">第一顿</span></span><div class="tip">🍙 饭团+炸鸡+布丁 ~¥600/人，顺便买好第二天早餐</div></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ======== DAY 2 ======== -->
+<div class="day-card" id="d2">
+  <div class="day-hd" style="background:var(--pink-l);"><span>2 · 🗼 6/19（周五）二次元×繁华</span><span class="meta">🥩 涩谷烧肉</span></div>
+  <div class="day-bd">
+    <div class="tl">
+      <div class="tl-item"><div class="time">08:00~08:30</div><div class="act">🌅 便利店早餐 🏪</div></div>
+      <div class="tl-item"><div class="time">08:30~09:00</div><div class="act">🚃 地铁→秋叶原（从上野5min）</div></div>
+      <div class="tl-item"><div class="time">09:00~12:00</div><div class="act"><strong>🤖 秋叶原·二次元圣地</strong><div class="tip">🎮 Radio会馆（手办/扭蛋）🕹️ SEGA游戏厅 🎀 女仆咖啡</div></div></div>
+      <div style="margin:0 0 8px 28px;"><div class="meal"><span class="m">🥪 午餐推荐：松屋牛丼 ~¥500</span><span class="m">🍛 CoCo咖喱 ~¥700</span></div></div>
+      <div class="tl-item photo"><div class="time">13:00~14:00</div><div class="act">📸 <strong>须贺神社·《你的名字。》楼梯</strong><div class="tip">📍 四谷三丁目站步行5min · 电影经典相遇阶梯！两人站上下互拍</div></div></div>
+      <div class="tl-item"><div class="time">14:00~16:00</div><div class="act"><strong>🎀 原宿·竹下通</strong><div class="tip">可丽饼必吃！LINE Friends Store</div></div></div>
+      <div class="tl-item photo"><div class="time">16:00~19:00</div><div class="act">📸 <strong>🌃 涩谷十字路口+PARCO</strong><div class="tip">星巴克二楼窗边拍照 · PARCO有任天堂/宝可梦/Jump主题店</div></div></div>
+      <div class="tl-item"><div class="time">19:00~21:00</div><div class="act"><strong>🥩 涩谷晚餐</strong><div class="meal"><span class="m">🥩 焼肉トラジ ~¥2,000/人</span><span class="m">🍜 一兰拉面 ~¥1,200/人</span></div></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ======== DAY 3 ======== -->
+<div class="day-card" id="d3">
+  <div class="day-hd" style="background:#E0F0FF;"><span>3 · 🌊 6/20（周六）镰仓·江之岛</span><span class="meta">🌅 湘南海岸</span></div>
+  <div class="day-bd">
+    <div class="tl">
+      <div class="tl-item"><div class="time">08:00~09:30</div><div class="act"><strong>🚃 新宿→藤沢→镰仓</strong><div class="tip">新宿买「小田急一日フリーパス」¥1,640/人 超划算！</div></div></div>
+      <div class="tl-item photo"><div class="time">09:30~11:00</div><div class="act">📸 <strong>🚃 镰仓高校前·《君名》铁道路口+湘南海岸</strong><div class="tip">分站铁路两侧等绿色电车抓拍！旁边就是蓝色大海🌊</div></div></div>
+      <div class="tl-item"><div class="time">11:00~12:30</div><div class="act"><strong>🏄 镰仓小町通+大佛</strong><div class="tip">小町通吃小吃→镰仓大佛（¥300）</div></div></div>
+      <div style="margin:0 0 8px 28px;"><div class="meal"><span class="m">🍡 峰本 镰仓丼 ~¥1,500</span><span class="m">🥟 大船軒便当 ~¥500</span></div></div>
+      <div class="tl-item photo"><div class="time">13:00~16:30</div><div class="act">📸 <strong>🏝️ 江之岛</strong><div class="tip">展望灯塔俯瞰湘南海岸+富士山！日落前1小时到超美</div></div></div>
+      <div class="tl-item"><div class="time">16:30~18:00</div><div class="act">🚃 返回东京</div></div>
+      <div class="tl-item photo"><div class="time">18:30~21:00</div><div class="act">📸 <strong>🗼 东京塔夜景</strong><div class="meal"><span class="m">🍜 东京塔附近拉面 ~¥800</span></div><div class="tip">亮灯到23:00，赤羽桥站出口拍全景</div></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ======== DAY 4 ======== -->
+<div class="day-card" id="d4">
+  <div class="day-hd" style="background:var(--moss-l);"><span>4 · 🚄 6/21（周日）东京→京都</span><span class="meta">⛩️ 古都初探</span></div>
+  <div class="day-bd">
+    <div style="background:var(--moss-l);border-radius:10px;padding:10px 12px;margin-bottom:10px;font-size:0.82rem;">
+      🚄 <strong>新干线</strong> 东京→京都 Nozomi 约2h15min · ¥13,000/人<br>
+      提前SmartEX App预定！坐右侧E座可看富士山🗻
+    </div>
+    <div class="tl">
+      <div class="tl-item"><div class="time">07:30~08:00</div><div class="act">🌅 退房，行李全带上</div></div>
+      <div class="tl-item"><div class="time">08:00~08:20</div><div class="act">🚃 到东京駅买駅弁当🍱</div></div>
+      <div class="tl-item photo"><div class="time">08:24~10:39</div><div class="act">📸 <strong>🚄 新干线体验！右侧看富士山🗻</strong><div class="tip">09:40~10:00经过静冈！推荐便当：牛肉幕之内便当~¥1,200</div></div></div>
+      <div class="tl-item"><div class="time">10:40~11:15</div><div class="act">🚃 到京都駅→酒店放行李</div></div>
+      <div class="tl-item photo"><div class="time">11:30~14:30</div><div class="act">📸 <strong>⛩️ 伏见稻荷大社·千本鸟居</strong><div class="tip">走15分钟上山避开人群！两人牵手拍背影超绝</div><div class="meal"><span class="m">🍜 门前小吃街 ~¥600</span></div></div></div>
+      <div class="tl-item"><div class="time">15:00~16:00</div><div class="act"><strong>🍵 抹茶体验</strong><div class="tip">推荐：祇园「伊藤久右卫门」抹茶芭菲</div></div></div>
+      <div class="tl-item photo"><div class="time">16:30~19:00</div><div class="act">📸 <strong>🏮 祇园·花见小路·鸭川</strong><div class="tip">运气好偶遇艺妓👘 傍晚鸭川边吹风超浪漫</div></div></div>
+      <div class="tl-item"><div class="time">19:00~21:00</div><div class="act"><strong>🍶 先斗町居酒屋晚餐</strong><div class="meal"><span class="m">🍢 烤串+清酒 ~¥2,000</span><span class="m">🍜 亲子丼 ~¥1,000</span></div></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ======== DAY 5 ======== -->
+<div class="day-card" id="d5">
+  <div class="day-hd" style="background:var(--gold-l);"><span>5 · 🏯 6/22（周一）京都全天</span><span class="meta">🌳 贵船+岚山+清水</span></div>
+  <div class="day-bd">
+    <div class="tl">
+      <div class="tl-item"><div class="time">07:00~07:30</div><div class="act">🌅 早起去岚山趁人少</div></div>
+      <div class="tl-item photo"><div class="time">07:30~09:30</div><div class="act">📸 <strong>🎋 岚山竹林+渡月桥</strong><div class="tip">7:30到几乎没人！竹林光影超梦幻，渡月桥拍情侣合影</div></div></div>
+      <div class="tl-item photo"><div class="time">09:30~10:30</div><div class="act">📸 <strong>🚃 叡山電車·穿越绿色森林 🌳</strong><div class="tip">岚山→(JR)→出町柳→叡山電車鞍馬線→贵船口<br>这就是你说的那个绝美电车！6月满眼翠绿，坐驾驶室后第一排视野最佳</div></div></div>
+      <div class="tl-item photo"><div class="time">10:30~12:30</div><div class="act">📸 <strong>⛩️ 贵船神社</strong><div class="tip">红色灯笼参道超有意境！夏季限定川床料理🍃 水占卜签📜</div></div></div>
+      <div style="margin:0 0 8px 28px;"><div class="meal"><span class="m">🍱 贵船川床料理 ~¥2,000</span><span class="m">🍜 或回市区汤豆腐 ~¥1,200</span></div></div>
+      <div class="tl-item"><div class="time">13:00~14:00</div><div class="act">🚃 贵船→清水寺（约1h）</div></div>
+      <div class="tl-item photo"><div class="time">14:00~15:30</div><div class="act">📸 <strong>🏯 清水寺+二年坂·三年坂</strong><div class="tip">门票¥400 · 清水舞台俯瞰京都！二年坂石头路拍背影</div></div></div>
+      <div class="tl-item"><div class="time">15:30~17:00</div><div class="act"><strong>🏠 锦市场·京都的厨房</strong><div class="tip">各种小吃渍物海鲜，边逛边吃买伴手礼</div></div></div>
+      <div class="tl-item"><div class="time">17:30~21:00</div><div class="act"><strong>🌙 京都最后一晚</strong><div class="meal"><span class="m">🍜 名代猪排 ~¥1,500</span><span class="m">🍣 鲭姿寿司 ~¥1,500</span></div><div class="tip">晚上鸭川边坐坐，买零食啤酒享受最后的京都之夜～</div></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ======== DAY 6 ======== -->
+<div class="day-card" id="d6">
+  <div class="day-hd" style="background:#FFE8E0;"><span>6 · 🛫 6/23（周二）大阪→回国</span><span class="meta">👟 购物+19:25飞</span></div>
+  <div class="day-bd">
+    <div style="background:#FFE8E0;border-radius:10px;padding:10px 12px;margin-bottom:10px;font-size:0.82rem;">
+      🚃 京都→大阪 JR新快速30min · ¥580<br>
+      🚃 難波→关西机场 南海电铁 Rap:t 35min · ¥1,450
+    </div>
+    <div class="tl">
+      <div class="tl-item"><div class="time">08:00~09:00</div><div class="act">🌅 退房，行李存京都駅或前台</div></div>
+      <div class="tl-item"><div class="time">09:00~09:30</div><div class="act">🚃 京都→大阪（JR新快速30min）</div></div>
+      <div class="tl-item"><div class="time">09:30~14:00</div><div class="act"><strong>🛍️ 大阪购物时间！</strong>
+        <div class="tip">
+        👟 <strong>鬼冢虎：</strong>心斋桥Onitsuka Tiger 或 梅田Grand Front店<br>
+        📸 <strong>拍立得相纸：</strong>Bic Camera难波店/ヨドバシ梅田/LOFT心斋桥<br>
+        🛍️ 心斋桥一整条街药妆零食伴手礼应有尽有！
+        </div>
+        <div class="meal"><span class="m">🥩 最后午餐：大阪烧 ~¥1,500</span></div>
+      </div></div>
+      <div class="tl-item"><div class="time">14:00~14:35</div><div class="act">🚃 难波→关西机场</div></div>
+      <div class="tl-item"><div class="time">14:35~16:30</div><div class="act">✈️ 机场Check-in+免税店</div></div>
+      <div class="tl-item"><div class="time">19:25→02:20+1</div><div class="act"><strong>✈️ 大阪→香港CX569→广州CX950</strong></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ======== PHOTO SPOTS ======== -->
+<div class="day-card section" id="photo">
+  <h2>📸 全部打卡拍照点</h2>
+  <div class="photo-grid">
+    <div class="photo-card"><div class="pn">🎬 须贺神社·君名楼梯</div><div class="pd">电影经典阶梯，安静神社</div><div class="pt">四谷三丁目站·两人站上下互拍</div></div>
+    <div class="photo-card"><div class="pn">🚃 镰仓高校前·君名道口</div><div class="pd">面朝大海的铁路道口</div><div class="pt">江之电镰仓高校前站·等电车抓拍</div></div>
+    <div class="photo-card"><div class="pn">⛩️ 伏见稻荷·千本鸟居</div><div class="pd">红色鸟居隧道</div><div class="pt">走15分钟上山·牵手背影杀</div></div>
+    <div class="photo-card"><div class="pn">🎋 岚山竹林</div><div class="pd">高耸竹林小径</div><div class="pt">7:30前到·仰头牵手拍</div></div>
+    <div class="photo-card"><div class="pn">🚃 叡山電車·森林🌳</div><div class="pd">穿越茂密树林的复古电车</div><div class="pt">出町柳→贵船口·第一排视野最佳</div></div>
+    <div class="photo-card"><div class="pn">⛩️ 贵船神社</div><div class="pd">红色灯笼参道+川床</div><div class="pt">水占卜签·川床料理拍照超有意境</div></div>
+    <div class="photo-card"><div class="pn">🏯 清水寺舞台</div><div class="pd">俯瞰京都城</div><div class="pt">门票¥400·二年坂拍和风街景</div></div>
+    <div class="photo-card"><div class="pn">🌃 涩谷十字路口</div><div class="pd">世界最繁忙路口</div><div class="pt">星巴克二楼/SHIBUYA SKY天台</div></div>
+    <div class="photo-card"><div class="pn">🗼 东京塔</div><div class="pd">经典红色铁塔</div><div class="pt">赤羽桥站拍全景</div></div>
+    <div class="photo-card"><div class="pn">🗻 新干线富士山</div><div class="pd">东京→京都途中</div><div class="pt">右侧E座·静冈附近09:40</div></div>
+    <div class="photo-card"><div class="pn">🏝️ 江之岛灯塔</div><div class="pd">湘南海岸+富士山</div><div class="pt">日落前1小时到</div></div>
+    <div class="photo-card"><div class="pn">🦀 道顿堀格力高</div><div class="pd">大阪标志打卡</div><div class="pt">晚上灯亮后更出片</div></div>
+  </div>
+</div>
+
+<!-- ======== HOTEL ======== -->
+<div class="day-card section" id="hotel">
+  <h2>🏨 具体酒店推荐 <span style="font-weight:400;font-size:0.8rem;color:var(--tl);">携程可订</span></h2>
+  <p style="font-size:0.8rem;color:var(--tl);margin-bottom:10px;">👇 点击酒店名可直接在携程搜索</p>
+
+  <h3 style="font-size:0.9rem;color:var(--indigo);margin:4px 0 8px;">🗼 东京·住上野区域（3晚 6/18~6/20）</h3>
+  <div class="hotel-list">
+    <div class="hotel-card">
+      <div class="hr">🥇 最推荐</div>
+      <div class="hn">东横INN 上野田原町站</div>
+      <div class="hp">💰 ¥300~380/晚 · 含早餐</div>
+      <div class="hi">✅ 上野站步行5min，Skyliner直达<br>✅ 日本最大经济连锁干净卫生</div>
+      <div class="hc">🔗 携程搜「东横INN上野田原町站」</div>
+    </div>
+    <div class="hotel-card">
+      <div class="hr">🥈 位置最佳·深夜到安心</div>
+      <div class="hn">APA Hotel 京成上野站前</div>
+      <div class="hp">💰 ¥400~550/晚</div>
+      <div class="hi">✅ 京成上野站步行1min！周边热闹</div>
+      <div class="hc">🔗 携程搜「APA京成上野站前」</div>
+    </div>
+    <div class="hotel-card">
+      <div class="hr">🥉 含早+晚酒水</div>
+      <div class="hn">Super Hotel JR上野入谷口</div>
+      <div class="hp">💰 ¥350~500/晚 · 含早餐+晚酒水</div>
+      <div class="hi">✅ 免费酒水畅饮🍻 有浴缸和面膜</div>
+      <div class="hc">🔗 携程搜「JR上野入谷口超级酒店」</div>
+    </div>
+    <div class="hotel-card">
+      <div class="hr">4️⃣ 预算加一点·升级新宿</div>
+      <div class="hn">新宿灿路都大饭店</div>
+      <div class="hp">💰 ¥500~700/晚</div>
+      <div class="hi">✅ 新宿站步行3min！3星级房间大</div>
+      <div class="hc">🔗 携程搜「新宿灿路都大饭店」</div>
+    </div>
+  </div>
+
+  <h3 style="font-size:0.9rem;color:var(--moss);margin:14px 0 8px;">🏯 京都·住京都站附近（2晚 6/21~6/22）</h3>
+  <div class="hotel-list">
+    <div class="hotel-card">
+      <div class="hr">🥇 极致省钱·含两餐</div>
+      <div class="hn">京都环球酒店乌丸</div>
+      <div class="hp">💰 ¥200~350/晚 <strong>含早晚餐！</strong></div>
+      <div class="hi">✅ 包两顿饭+大浴场泡汤♨️ 性价比炸裂</div>
+      <div class="hc">🔗 携程搜「京都环球酒店乌丸」</div>
+    </div>
+    <div class="hotel-card">
+      <div class="hr">🥈 均衡舒服·3星</div>
+      <div class="hn">樱花台酒店 (Sakura Terrace)</div>
+      <div class="hp">💰 ¥350~500/晚</div>
+      <div class="hi">✅ 京都站步行7min，有大浴场桑拿</div>
+      <div class="hc">🔗 携程搜「樱花台酒店 京都」</div>
+    </div>
+    <div class="hotel-card">
+      <div class="hr">🥉 如家般含早餐</div>
+      <div class="hn">VIA INN 京都站八条口</div>
+      <div class="hp">💰 ¥400~550/晚 含早餐</div>
+      <div class="hi">✅ 京都站步行3min！JR旗下品质稳定</div>
+      <div class="hc">🔗 携程搜「VIA INN京都站八条口」</div>
+    </div>
+    <div class="hotel-card">
+      <div class="hr">4️⃣ 预算加一点·4星</div>
+      <div class="hn">京都站前大和ROYNET</div>
+      <div class="hp">💰 ¥500~700/晚</div>
+      <div class="hi">✅ 4星级房间宽敞，楼下便利店药妆店</div>
+      <div class="hc">🔗 携程搜「京都站前大和ROYNET酒店」</div>
+    </div>
+  </div>
+
+  <h3 style="font-size:0.9rem;color:var(--gold);margin:14px 0 8px;">💡 推荐组合·丰俭由你</h3>
+  <div style="background:#F5F0FF;border-radius:12px;padding:12px 14px;font-size:0.82rem;">
+    <div style="display:flex;justify-content:space-between;padding:4px 0;border-bottom:1px solid #E0D8E8;"><span>💰 极致省钱</span><span>东横INN+环球乌丸</span><span><strong>~¥4,200</strong></span></div>
+    <div style="display:flex;justify-content:space-between;padding:4px 0;border-bottom:1px solid #E0D8E8;"><span>⭐ 均衡推荐</span><span>东横INN+樱花台</span><span><strong>~¥4,500</strong></span></div>
+    <div style="display:flex;justify-content:space-between;padding:4px 0;border-bottom:1px solid #E0D8E8;"><span>🛌 升级舒服</span><span>Super Hotel+樱花台</span><span><strong>~¥4,800</strong></span></div>
+    <div style="display:flex;justify-content:space-between;padding:4px 0;"><span>💎 新宿+京都站前</span><span>Sunroute+Daiwa</span><span><strong>~¥5,500</strong></span></div>
+  </div>
+</div>
+
+<!-- ======== PACKING LIST ======== -->
+<div class="day-card section" id="pack">
+  <h2>🎒 出游携带清单 <span style="font-weight:400;font-size:0.8rem;color:var(--tl);">照着收就行 ✅</span></h2>
+
+  <h3 style="font-size:0.9rem;color:var(--moss);margin:0 0 8px;">📋 必备证件</h3>
+  <div class="ck">
+    <label class="ck-item"><input type=checkbox> 护照（有效期6个月以上）</label>
+    <label class="ck-item"><input type=checkbox> 机票行程单打印件</label>
+    <label class="ck-item"><input type=checkbox> 酒店预订确认单</label>
+    <label class="ck-item"><input type=checkbox> 信用卡 + 2万日元现金</label>
+    <label class="ck-item"><input type=checkbox> 手机+充电宝+数据线</label>
+  </div>
+
+  <h3 style="font-size:0.9rem;color:var(--moss);margin:14px 0 8px;">👕 衣物</h3>
+  <div class="ck">
+    <label class="ck-item"><input type=checkbox> 薄外套+雨伞（6月梅雨季）☂️</label>
+    <label class="ck-item"><input type=checkbox> 浅色系衣服（拍照好看）</label>
+    <label class="ck-item"><input type=checkbox> 舒适的步行鞋（每天2万步+）</label>
+    <label class="ck-item"><input type=checkbox> 防晒帽+墨镜</label>
+  </div>
+
+  <h3 style="font-size:0.9rem;color:var(--gold);margin:14px 0 8px;">💡 行前准备</h3>
+  <div class="ck">
+    <label class="ck-item"><input type=checkbox> 下载Suica App/买实体卡</label>
+    <label class="ck-item"><input type=checkbox> 下载Google Maps</label>
+    <label class="ck-item"><input type=checkbox> 买SIM卡/WiFi蛋</label>
+    <label class="ck-item"><input type=checkbox> SmartEX App订新干线</label>
+  </div>
+
+  <h3 style="font-size:0.9rem;color:var(--crimson);margin:14px 0 8px;">⚠️ 注意事项</h3>
+  <div class="ck">
+    <label class="ck-item"><input type=checkbox> 日本靠左走，电梯站一侧</label>
+    <label class="ck-item"><input type=checkbox> 随身带小垃圾袋（垃圾桶少）</label>
+    <label class="ck-item"><input type=checkbox> 地铁手机静音，勿通话</label>
+    <label class="ck-item"><input type=checkbox> 寺庙参拜：净手→投币→二拜→二拍→一拜</label>
+  </div>
+</div>
+
+<!-- ======== FLOATING NAV ======== -->
+<div class="fnav" id="fnav">
+  <a href="#" onclick="return goDay('d1')" class="active">1🛬</a>
+  <a href="#" onclick="return goDay('d2')">2🗼</a>
+  <a href="#" onclick="return goDay('d3')">3🌊</a>
+  <a href="#" onclick="return goDay('d4')">4🚄</a>
+  <a href="#" onclick="return goDay('d5')">5🏯</a>
+  <a href="#" onclick="return goDay('d6')">6🛫</a>
+  <a href="#" onclick="return goDay('photo')">📸</a>
+  <a href="#" onclick="return goDay('hotel')">🏨</a>
+  <a href="#" onclick="return goDay('pack')">🎒</a>
+</div>
+
+<script>
+function showTab(id){
+  document.querySelectorAll('.day-card').forEach(c=>c.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+  const d = document.getElementById(id);
+  if(d){d.classList.add('active');d.scrollIntoView({behavior:'smooth',block:'start'});}
+  const t = document.querySelector(`.tab-btn[onclick*="'${id}'"]`);
+  if(t) t.classList.add('active');
+  // update fnav
+  document.querySelectorAll('.fnav a').forEach(a=>a.classList.remove('active'));
+  const f = document.querySelector(`.fnav a[onclick*="'${id}'"]`);
+  if(f) f.classList.add('active');
+}
+function goDay(id){
+  showTab(id);
+  return false;
+}
+
+// scroll to sync fnav highlight
+let ticking=false;
+document.addEventListener('scroll',function(){
+  if(!ticking){ticking=true;requestAnimationFrame(function(){
+    const cards=document.querySelectorAll('.day-card');
+    let closest=null,minD=Infinity;
+    cards.forEach(c=>{
+      if(c.classList.contains('section')) return;
+      const r=c.getBoundingClientRect();
+      if(r.top<300&&r.top>0&&r.top<minD){minD=r.top;closest=c.id;}
+    });
+    if(closest){
+      document.querySelectorAll('.fnav a').forEach(a=>a.classList.remove('active'));
+      const f=document.querySelector(`.fnav a[onclick*="'${closest}'"]`);
+      if(f)f.classList.add('active');
+    }
+    ticking=false;
+  });}
+},{passive:true});
+</script>
+
+</body>
+</html>
