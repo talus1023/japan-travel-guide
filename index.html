@@ -113,7 +113,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Helvetica Neue','PingFang SC'
     <span class="tag">💰 总预算 ≈¥10,500</span>
     <span class="tag">🗺️ 东京进·大阪出</span>
   </div>
-  <div class="home-addr">📍 家：广州番禺东环龙美佰佳便利店 → 🚕全程打车</div>
+  <div class="home-addr">✈️ 即将出发！倒数 <span id="countdownDays">5</span> 天 · 好期待呀 💑</div>
 </div>
 
 <!-- FLIGHTS -->
@@ -897,6 +897,11 @@ function showToast(msg) {
 setTimeout(updateCheck, 100);
 
 // Scroll sync fnav
+  (function(){
+    var cd=document.getElementById("countdownDays");
+    if(cd){var d=new Date(),dep=new Date(2026,5,18),diff=Math.ceil((dep-d)/(864e5));cd.textContent=diff>0?diff:"0";}
+  })();
+
 var ticking_fnav = false;
 document.addEventListener('scroll', function() {
   if (!ticking_fnav) {
