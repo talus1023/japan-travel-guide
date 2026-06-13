@@ -91,6 +91,8 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Helvetica Neue','PingFang SC'
 .clothes-grid .cg-item .cg-num{font-weight:700;font-size:0.95rem;color:var(--crimson)}
 .map-btn{display:inline-flex;align-items:center;gap:4px;background:#E8F5E8;color:#3A7A3A;padding:3px 10px;border-radius:14px;font-size:0.7rem;text-decoration:none;font-weight:500;margin-top:3px}
 .map-btn:active{opacity:0.7}
+.img-btn{display:inline-flex;align-items:center;gap:4px;background:#FFE8E0;color:#C05050;padding:3px 10px;border-radius:14px;font-size:0.7rem;text-decoration:none;font-weight:500;margin-top:3px}
+.img-btn:active{opacity:0.7}
 .toast{position:fixed;bottom:100px;left:50%;transform:translateX(-50%);background:rgba(0,0,0,0.8);color:#fff;padding:10px 20px;border-radius:30px;font-size:0.82rem;z-index:999;opacity:0;transition:opacity .3s;pointer-events:none}
 .toast.show{opacity:1}
 .progress-bar{height:4px;background:#E8E0E8;border-radius:4px;margin:8px 0;overflow:hidden}
@@ -230,7 +232,8 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Helvetica Neue','PingFang SC'
       </div></div>
 
       <div class="tl-item photo"><div class="time">09:00~10:00</div><div class="act">📸 <strong>🌃 涩谷十字路口 + 八公像</strong>
-        <a class="map-btn" href="https://maps.google.com/?q=涩谷十字路口+东京" target="_blank">📍 谷歌地图</a>
+        <a class="map-btn" href="https://www.google.com/maps/dir/上野駅/渋谷" target="_blank">🚃 导航</a>
+        <a class="img-btn" href="https://www.google.com/search?tbm=isch&q=涩谷十字路口" target="_blank">📷 参考照</a>
         <div class="tip">全球最繁忙十字路口·八公像打卡·清晨人少好拍照</div></div></div>
 
       <div class="tl-item"><div class="time">10:00~12:00</div><div class="act"><strong>🎀 原宿·竹下通 + 明治神宫</strong>
@@ -241,7 +244,8 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Helvetica Neue','PingFang SC'
 
       <div class="tl-item photo"><div class="time">13:00~14:00</div><div class="act">📸 <strong>须贺神社·《你的名字。》楼梯</strong>
         <a class="map-btn" href="https://maps.google.com/?q=须贺神社+四谷+东京" target="_blank">📍 地图</a>
-        <a class="map-btn" href="https://www.google.com/maps/dir/原宿/須賀神社" target="_blank">🚃 导航路线</a>
+        <a class="map-btn" href="https://www.google.com/maps/dir/原宿/須賀神社" target="_blank">🚃 导航</a>
+        <a class="img-btn" href="https://www.google.com/search?tbm=isch&q=须贺神社+君名" target="_blank">📷 同款姿势</a>
         <div class="tip">📍 四谷三丁目站步行5min · 经典相遇阶梯！两人上下互拍</div></div></div>
 
       <div class="tl-item"><div class="time">14:00~15:00</div><div class="act"><strong>☕ 表参道 下午茶/歇脚</strong><div class="tip">从须贺神社步行可达·超多网红咖啡店</div></div></div>
@@ -251,7 +255,8 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Helvetica Neue','PingFang SC'
       </div></div>
 
       <div class="tl-item photo"><div class="time">15:30~20:00</div><div class="act">📸 <strong>🤖 秋叶原·傍晚+夜景才是精髓！</strong>
-        <a class="map-btn" href="https://maps.google.com/?q=秋叶原+东京" target="_blank">📍 谷歌地图</a>
+        <a class="map-btn" href="https://maps.google.com/?q=秋叶原+东京" target="_blank">📍 地图</a>
+        <a class="img-btn" href="https://www.google.com/search?tbm=isch&q=秋叶原+夜景" target="_blank">📷 参考照</a>
         <div class="tip">
           🎮 Radio会馆（手办/扭蛋）🕹️ SEGA游戏厅 🎀 女仆咖啡☕<br>
           🌆 <strong>傍晚霓虹灯亮起后的秋叶原超有氛围！</strong> 比白天好看10倍✨<br>
@@ -459,18 +464,18 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Helvetica Neue','PingFang SC'
 <div class="day-card section" id="photo">
   <h2>📸 全部拍照打卡点 <span style="font-weight:400;font-size:0.8rem;color:var(--tl);">点一下打开地图</span></h2>
   <div class="photo-grid">
-    <div class="photo-card" onclick="openMap('https://maps.google.com/?q=须贺神社+东京')"><div class="pn">🎬 须贺神社·君名楼梯</div><div class="pd">电影经典相遇阶梯</div><div class="pt">📍 四谷三丁目站步行5min</div></div>
-    <div class="photo-card" onclick="openMap('https://maps.google.com/?q=镰仓高校前站+神奈川')"><div class="pn">🚃 镰仓高校前·君名道口</div><div class="pd">面朝大海的铁路道口</div><div class="pt">📍 江之电镰仓高校前站</div></div>
-    <div class="photo-card" onclick="openMap('https://maps.google.com/?q=伏见稻荷大社+京都')"><div class="pn">⛩️ 伏见稻荷·千本鸟居</div><div class="pd">红色鸟居隧道</div><div class="pt">📍 JR奈良线稻荷站</div></div>
-    <div class="photo-card" onclick="openMap('https://maps.google.com/?q=岚山竹林+京都')"><div class="pn">🎋 岚山竹林</div><div class="pd">高耸竹林小径</div><div class="pt">📍 JR嵯峨岚山站</div></div>
-    <div class="photo-card" onclick="openMap('https://maps.google.com/?q=叡山电鉄鞍馬線+京都')"><div class="pn">🚃 叡山電車·森林🌳</div><div class="pd">穿越绿色森林电车</div><div class="pt">📍 出町柳→贵船口</div></div>
-    <div class="photo-card" onclick="openMap('https://maps.google.com/?q=贵船神社+京都')"><div class="pn">⛩️ 贵船神社</div><div class="pd">红色灯笼+川床</div><div class="pt">📍 叡山电铁贵船口站</div></div>
-    <div class="photo-card" onclick="openMap('https://maps.google.com/?q=清水寺+京都')"><div class="pn">🏯 清水寺舞台</div><div class="pd">俯瞰京都城</div><div class="pt">📍 门票¥400</div></div>
-    <div class="photo-card" onclick="openMap('https://maps.google.com/?q=涩谷十字路口+东京')"><div class="pn">🌃 涩谷十字路口</div><div class="pd">世界最繁忙路口</div><div class="pt">📍 涩谷站前</div></div>
-    <div class="photo-card" onclick="openMap('https://maps.google.com/?q=东京塔+东京')"><div class="pn">🗼 东京塔</div><div class="pd">经典红色铁塔</div><div class="pt">📍 赤羽桥站</div></div>
-    <div class="photo-card" onclick="openMap('https://maps.google.com/?q=江之岛+神奈川')"><div class="pn">🏝️ 江之岛灯塔</div><div class="pd">湘南海岸全景</div><div class="pt">📍 日落前1小时到</div></div>
-    <div class="photo-card" onclick="openMap('https://maps.google.com/?q=道顿堀+大阪')"><div class="pn">🦀 道顿堀格力高</div><div class="pd">大阪标志打卡</div><div class="pt">📍 晚上灯亮出片</div></div>
-    <div class="photo-card" onclick="openMap('https://maps.google.com/?q=秋叶原+东京')"><div class="pn">🤖 秋叶原夜景</div><div class="pd">霓虹灯下的二次元天堂</div><div class="pt">📍 傍晚去最好看！</div></div>
+    <div class="photo-card" onclick="openMap('https://maps.google.com/?q=须贺神社+东京')"><div class="pn">🎬 须贺神社·君名楼梯 <a class="img-btn" href="https://www.google.com/search?tbm=isch&q=须贺神社+君名楼梯" target="_blank">📷 参考</a></div><div class="pd">电影相遇阶梯！一人站上一人站下互拍</div><div class="pt">📍 四谷三丁目站步行5min</div></div>
+    <div class="photo-card" onclick="openMap('https://maps.google.com/?q=镰仓高校前站+神奈川')"><div class="pn">🚃 镰仓高校前·君名道口 <a class="img-btn" href="https://www.google.com/search?tbm=isch&q=镰仓高校前+铁道路口" target="_blank">📷 参考</a></div><div class="pd">面朝大海铁路道口，等绿色电车抓拍</div><div class="pt">📍 江之电镰仓高校前站</div></div>
+    <div class="photo-card" onclick="openMap('https://maps.google.com/?q=伏见稻荷大社+京都')"><div class="pn">⛩️ 伏见稻荷·千本鸟居 <a class="img-btn" href="https://www.google.com/search?tbm=isch&q=伏见稻荷+千本鸟居" target="_blank">📷 参考</a></div><div class="pd">红色鸟居隧道，上山15min避开人群</div><div class="pt">📍 JR奈良线稻荷站</div></div>
+    <div class="photo-card" onclick="openMap('https://maps.google.com/?q=岚山竹林+京都')"><div class="pn">🎋 岚山竹林 <a class="img-btn" href="https://www.google.com/search?tbm=isch&q=岚山竹林" target="_blank">📷 参考</a></div><div class="pd">高耸竹林小径，仰头牵手拍！</div><div class="pt">📍 JR嵯峨岚山站</div></div>
+    <div class="photo-card" onclick="openMap('https://maps.google.com/?q=叡山电鉄鞍馬線+京都')"><div class="pn">🚃 叡山電車·森林🌳 <a class="img-btn" href="https://www.google.com/search?tbm=isch&q=叡山電車+森林" target="_blank">📷 参考</a></div><div class="pd">穿越绿色森林的电车！坐第一排</div><div class="pt">📍 出町柳→贵船口</div></div>
+    <div class="photo-card" onclick="openMap('https://maps.google.com/?q=贵船神社+京都')"><div class="pn">⛩️ 贵船神社 <a class="img-btn" href="https://www.google.com/search?tbm=isch&q=贵船神社+灯笼" target="_blank">📷 参考</a></div><div class="pd">红色灯笼参道+川床料理</div><div class="pt">📍 叡山电铁贵船口站</div></div>
+    <div class="photo-card" onclick="openMap('https://maps.google.com/?q=清水寺+京都')"><div class="pn">🏯 清水寺舞台 <a class="img-btn" href="https://www.google.com/search?tbm=isch&q=清水寺+舞台" target="_blank">📷 参考</a></div><div class="pd">俯瞰京都城！门票¥400</div><div class="pt">📍 二年坂石头路拍背影</div></div>
+    <div class="photo-card" onclick="openMap('https://maps.google.com/?q=涩谷十字路口+东京')"><div class="pn">🌃 涩谷十字路口 <a class="img-btn" href="https://www.google.com/search?tbm=isch&q=涩谷十字路口" target="_blank">📷 参考</a></div><div class="pd">世界最繁忙路口</div><div class="pt">📍 星巴克二楼/SKY天台</div></div>
+    <div class="photo-card" onclick="openMap('https://maps.google.com/?q=东京塔+东京')"><div class="pn">🗼 东京塔 <a class="img-btn" href="https://www.google.com/search?tbm=isch&q=东京塔+夜景" target="_blank">📷 参考</a></div><div class="pd">经典红色铁塔夜景</div><div class="pt">📍 赤羽桥站拍全景</div></div>
+    <div class="photo-card" onclick="openMap('https://maps.google.com/?q=江之岛+神奈川')"><div class="pn">🏝️ 江之岛灯塔 <a class="img-btn" href="https://www.google.com/search?tbm=isch&q=江之岛+展望台+富士山" target="_blank">📷 参考</a></div><div class="pd">湘南海岸+富士山全景</div><div class="pt">📍 日落前1小时到</div></div>
+    <div class="photo-card" onclick="openMap('https://maps.google.com/?q=道顿堀+大阪')"><div class="pn">🦀 道顿堀格力高 <a class="img-btn" href="https://www.google.com/search?tbm=isch&q=道顿堀+格力高" target="_blank">📷 参考</a></div><div class="pd">大阪标志打卡</div><div class="pt">📍 晚上灯亮出片</div></div>
+    <div class="photo-card" onclick="openMap('https://maps.google.com/?q=秋叶原+东京')"><div class="pn">🤖 秋叶原夜景 <a class="img-btn" href="https://www.google.com/search?tbm=isch&q=秋叶原+夜景" target="_blank">📷 参考</a></div><div class="pd">霓虹灯下的二次元天堂</div><div class="pt">📍 傍晚去最好看！</div></div>
   </div>
 </div>
 
