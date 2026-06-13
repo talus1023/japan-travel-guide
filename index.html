@@ -113,7 +113,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Helvetica Neue','PingFang SC'
     <span class="tag">💰 总预算 ≈¥10,500</span>
     <span class="tag">🗺️ 东京进·大阪出</span>
   </div>
-  <div class="home-addr">✈️ 即将出发！倒数 <span id="countdownDays">5</span> 天 · 好期待呀 💑</div>
+  <div class="home-addr">✈️ 出发倒计时：<span id="countdownDisplay">00天 00:00:00</span> 💑</div>
 </div>
 
 <!-- FLIGHTS -->
@@ -896,11 +896,23 @@ function showToast(msg) {
 // Init check count
 setTimeout(updateCheck, 100);
 
-// Scroll sync fnav
-  (function(){
-    var cd=document.getElementById("countdownDays");
-    if(cd){var d=new Date(),dep=new Date(2026,5,18),diff=Math.ceil((dep-d)/(864e5));cd.textContent=diff>0?diff:"0";}
-  })();
+// Precise countdown
+(function(){
+  function updateCD(){
+    var el=document.getElementById('countdownDisplay');
+    if(!el)return;
+    var now=new Date(), dep=new Date(2026,5,18,10,10,0); // June 18 10:10
+    var diff=dep-now;
+    if(diff<=0){el.textContent='🎉 出发啦！';return;}
+    var d=Math.floor(diff/864e5);
+    var h=Math.floor((diff%864e5)/36e5);
+    var m=Math.floor((diff%36e5)/6e4);
+    var s=Math.floor((diff%6e4)/1e3);
+    el.textContent=d+'天 '+(h<10?'0':'')+h+':'+(m<10?'0':'')+m+':'+(s<10?'0':'')+s;
+  }
+  updateCD();
+  setInterval(updateCD,1000);
+})();
 
 var ticking_fnav = false;
 document.addEventListener('scroll', function() {
